@@ -273,24 +273,39 @@
       </section>
 
       <!-- Sobre -->
-      <section id="sobre" class="bg-white">
-        <div class="container mx-auto px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+      <section id="sobre" class="relative overflow-hidden bg-white">
+        <img
+          src="./assets/images/bannerdois.jpg"
+          alt=""
+          aria-hidden="true"
+          class="absolute inset-0 h-full w-full object-cover"
+          loading="lazy"
+          decoding="async"
+        />
+        <div
+          class="pointer-events-none absolute inset-0 bg-gradient-to-br from-alfagray-800/80 via-alfagray-800/55 to-alfagreen-600/45"
+          aria-hidden="true"
+        ></div>
+
+        <div class="container relative mx-auto px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div class="grid gap-10 lg:grid-cols-12 lg:gap-12">
-            <div class="reveal lg:col-span-5">
-              <h2 class="text-2xl font-extrabold tracking-tight text-alfagray-800 sm:text-3xl">
+            <div class="reveal lg:col-span-5 text-white">
+              <h2 class="text-2xl font-extrabold tracking-tight drop-shadow sm:text-3xl">
                 Quem Somos
               </h2>
-              <p class="mt-4 text-base leading-relaxed text-alfagray-800/75">
+              <p class="mt-4 text-base leading-relaxed text-white/85 drop-shadow">
                 Somos a <strong>ALFACAR - Locação e Transportes</strong>, empresa baiana com
                 <strong>15+ anos de experiência</strong> especializada em mobilidade corporativa e
                 saúde móvel. Atuamos em quatro regiões do Brasil: <strong>Sul</strong>,
                 <strong>Sudeste</strong>, <strong>Nordeste</strong> e <strong>Centro-Oeste</strong>.
               </p>
 
-              <div class="mt-6 inline-flex items-center gap-2 rounded-full bg-alfagreen-50 px-4 py-2">
-                <span class="text-sm font-semibold text-alfagreen-600">Empresa 100% Brasileira</span>
-                <span class="text-sm text-alfagray-800/60">•</span>
-                <span class="text-sm font-semibold text-alfagray-800/75">Salvador/BA</span>
+              <div
+                class="mt-6 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 ring-1 ring-white/20 backdrop-blur"
+              >
+                <span class="text-sm font-semibold text-white">Empresa 100% Brasileira</span>
+                <span class="text-sm text-white/60">•</span>
+                <span class="text-sm font-semibold text-white/85">Salvador/BA</span>
               </div>
             </div>
 
@@ -338,24 +353,11 @@
       </section>
 
       <!-- Soluções -->
-      <section id="solucoes" class="relative overflow-hidden bg-white">
-        <img
-          src="./assets/images/bannerdois.jpg"
-          alt=""
-          aria-hidden="true"
-          class="absolute inset-0 h-full w-full object-cover"
-          loading="lazy"
-          decoding="async"
-        />
-        <div
-          class="pointer-events-none absolute inset-0 bg-gradient-to-br from-alfagray-800/80 via-alfagray-800/55 to-alfagreen-600/45"
-          aria-hidden="true"
-        ></div>
-
-        <div class="container relative mx-auto px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+      <section id="solucoes" class="bg-alfagray-50">
+        <div class="container mx-auto px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div class="reveal max-w-2xl">
-            <h2 class="text-2xl font-extrabold tracking-tight text-white drop-shadow sm:text-3xl">Soluções</h2>
-            <p class="mt-4 text-base leading-relaxed text-white/85 drop-shadow">
+            <h2 class="text-2xl font-extrabold tracking-tight text-alfagray-800 sm:text-3xl">Soluções</h2>
+            <p class="mt-4 text-base leading-relaxed text-alfagray-800/75">
               Um portfólio objetivo, pensado para operações corporativas que exigem serviço consistente,
               segurança e disponibilidade.
             </p>
@@ -909,7 +911,7 @@
           </div>
         </div>
 
-        <div class="mt-10 border-t border-black/5 pt-6 text-xs text-alfagray-800/60">Copyright © 2025 Alfacar</div>
+        <div class="mt-10 border-t border-black/5 pt-6 text-xs text-alfagray-800/60">Copyright © 2026 Alfacar</div>
       </div>
     </footer>
 
