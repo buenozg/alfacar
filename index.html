@@ -1,0 +1,921 @@
+<!doctype html>
+<html lang="pt-BR" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="ALFACAR - Locação e Transportes. 15+ anos de experiência em mobilidade corporativa e saúde móvel, com atuação nacional e operação 24/7."
+    />
+    <meta name="theme-color" content="#059669" />
+    <meta name="robots" content="index,follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="ALFACAR | Mobilidade Corporativa & Saúde Móvel" />
+    <meta
+      property="og:description"
+      content="Soluções integradas em mobilidade corporativa e saúde móvel, com segurança, eficiência e confiabilidade."
+    />
+    <meta property="og:type" content="website" />
+
+    <title>ALFACAR | Locação e Transportes</title>
+
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+
+    <!-- Font: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./js/tailwind-config.js"></script>
+
+    <style>
+      :root {
+        scroll-behavior: smooth;
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(18px);
+        transition: opacity 700ms ease, transform 700ms ease;
+        will-change: opacity, transform;
+      }
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        :root {
+          scroll-behavior: auto;
+        }
+        .reveal {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="h-full bg-white font-sans text-alfagray-800 antialiased">
+    <a
+      href="#conteudo"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-alfagreen-600 focus:shadow-lg"
+    >
+      Pular para o conteúdo
+    </a>
+
+    <!-- Header -->
+    <header
+      id="topo"
+      class="fixed inset-x-0 top-0 z-50 border-b border-black/5 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/70"
+      aria-label="Cabeçalho"
+    >
+      <div class="container mx-auto grid h-16 grid-cols-12 items-center px-4 sm:px-6 lg:px-8 md:grid-cols-[1fr_auto_1fr]">
+        <a
+          href="#topo"
+          class="group col-span-10 flex items-center sm:col-span-10 md:col-span-1"
+          aria-label="Ir para o topo (ALFACAR)"
+        >
+          <img
+            src="./assets/images/logo.svg"
+            alt="ALFACAR - Locação e Transportes"
+            class="h-14 w-auto origin-left object-contain md:h-16 md:scale-110"
+            decoding="async"
+            fetchpriority="high"
+          />
+        </a>
+
+        <!-- Desktop nav -->
+        <nav class="col-span-12 hidden items-center justify-center gap-6 md:col-span-1 md:flex" aria-label="Navegação principal">
+          <a
+            href="#sobre"
+            class="text-sm font-semibold text-alfagray-800/80 transition-colors hover:text-alfagreen-600"
+            >Sobre</a
+          >
+          <a
+            href="#solucoes"
+            class="text-sm font-semibold text-alfagray-800/80 transition-colors hover:text-alfagreen-600"
+            >Soluções</a
+          >
+          <a
+            href="#categorias"
+            class="text-sm font-semibold text-alfagray-800/80 transition-colors hover:text-alfagreen-600"
+            >Categorias</a
+          >
+          <a
+            href="#diferenciais"
+            class="text-sm font-semibold text-alfagray-800/80 transition-colors hover:text-alfagreen-600"
+            >Diferenciais</a
+          >
+          <a
+            href="#numeros"
+            class="text-sm font-semibold text-alfagray-800/80 transition-colors hover:text-alfagreen-600"
+            >Números</a
+          >
+          <a
+            href="#contato"
+            class="text-sm font-semibold text-alfagray-800/80 transition-colors hover:text-alfagreen-600"
+            >Contato</a
+          >
+        </nav>
+
+        <div class="col-span-12 hidden items-center justify-end gap-3 md:col-span-1 md:flex">
+          <a
+            href="#contato"
+            class="inline-flex items-center justify-center rounded-xl border border-alfagreen-600 px-4 py-2 text-sm font-semibold text-alfagreen-600 transition-all hover:bg-alfagreen-50 focus:outline-none focus:ring-2 focus:ring-alfagreen-500 focus:ring-offset-2"
+            >Fale Conosco</a
+          >
+          <a
+            href="#contato"
+            class="inline-flex items-center justify-center rounded-xl bg-alfagreen-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:bg-alfagreen-500 focus:outline-none focus:ring-2 focus:ring-alfagreen-500 focus:ring-offset-2"
+            >Solicite uma Proposta</a
+          >
+        </div>
+
+        <!-- Mobile button -->
+        <button
+          id="mobileMenuButton"
+          type="button"
+          class="col-span-2 inline-flex items-center justify-center justify-self-end rounded-xl border border-black/10 bg-white px-3 py-2 text-sm font-semibold text-alfagray-800 shadow-sm transition-all hover:bg-alfagray-50 focus:outline-none focus:ring-2 focus:ring-alfagreen-500 focus:ring-offset-2 md:hidden"
+          aria-label="Abrir menu"
+          aria-expanded="false"
+          aria-controls="mobileMenu"
+        >
+          <i data-lucide="menu" class="h-5 w-5" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <!-- Mobile menu -->
+      <div id="mobileMenu" class="hidden border-t border-black/5 bg-white md:hidden">
+        <nav class="container mx-auto px-4 py-3 sm:px-6" aria-label="Navegação mobile">
+          <div class="grid gap-2">
+            <a
+              href="#sobre"
+              class="rounded-lg px-3 py-2 text-sm font-semibold text-alfagray-800/80 hover:bg-alfagray-50 hover:text-alfagreen-600"
+              >Sobre</a
+            >
+            <a
+              href="#solucoes"
+              class="rounded-lg px-3 py-2 text-sm font-semibold text-alfagray-800/80 hover:bg-alfagray-50 hover:text-alfagreen-600"
+              >Soluções</a
+            >
+            <a
+              href="#categorias"
+              class="rounded-lg px-3 py-2 text-sm font-semibold text-alfagray-800/80 hover:bg-alfagray-50 hover:text-alfagreen-600"
+              >Categorias</a
+            >
+            <a
+              href="#diferenciais"
+              class="rounded-lg px-3 py-2 text-sm font-semibold text-alfagray-800/80 hover:bg-alfagray-50 hover:text-alfagreen-600"
+              >Diferenciais</a
+            >
+            <a
+              href="#numeros"
+              class="rounded-lg px-3 py-2 text-sm font-semibold text-alfagray-800/80 hover:bg-alfagray-50 hover:text-alfagreen-600"
+              >Números</a
+            >
+            <a
+              href="#contato"
+              class="rounded-lg px-3 py-2 text-sm font-semibold text-alfagray-800/80 hover:bg-alfagray-50 hover:text-alfagreen-600"
+              >Contato</a
+            >
+            <div class="mt-2 grid grid-cols-1 gap-2">
+              <a
+                href="#contato"
+                class="inline-flex items-center justify-center rounded-xl border border-alfagreen-600 px-4 py-2 text-sm font-semibold text-alfagreen-600 transition-all hover:bg-alfagreen-50 focus:outline-none focus:ring-2 focus:ring-alfagreen-500 focus:ring-offset-2"
+                >Fale Conosco</a
+              >
+              <a
+                href="#contato"
+                class="inline-flex items-center justify-center rounded-xl bg-alfagreen-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:bg-alfagreen-500 focus:outline-none focus:ring-2 focus:ring-alfagreen-500 focus:ring-offset-2"
+                >Solicite uma Proposta</a
+              >
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main id="conteudo" class="pt-16">
+      <!-- Hero -->
+      <section aria-label="Seção principal" class="relative overflow-hidden bg-white">
+        <div class="container mx-auto px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+          <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+            <div class="reveal">
+              <div
+                class="inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1 text-xs font-semibold text-alfagreen-600 ring-1 ring-black/5"
+              >
+                <span class="inline-flex h-2 w-2 rounded-full bg-alfagreen-500" aria-hidden="true"></span>
+                Soluções Integradas em Mobilidade e Saúde
+              </div>
+
+              <h1 class="mt-5 text-3xl font-extrabold tracking-tight text-alfagray-800 sm:text-4xl lg:text-5xl">
+                O Futuro da Sua Operação Começa Aqui
+              </h1>
+              <p class="mt-4 text-base leading-relaxed text-alfagray-800/75 sm:text-lg">
+                Ecossistema Integrado - Mobilidade Corporativa &amp; Saúde Móvel. Entregamos segurança,
+                eficiência e confiabilidade para operações críticas, com atuação nacional e suporte 24/7.
+              </p>
+
+              <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <a
+                  href="#contato"
+                  class="inline-flex items-center justify-center rounded-xl bg-alfagreen-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all hover:bg-alfagreen-500 focus:outline-none focus:ring-2 focus:ring-alfagreen-500 focus:ring-offset-2"
+                >
+                  Solicite uma Proposta
+                </a>
+                <a
+                  href="#solucoes"
+                  class="inline-flex items-center justify-center rounded-xl border border-alfagreen-600 px-6 py-3 text-sm font-semibold text-alfagreen-600 transition-all hover:bg-alfagreen-50 focus:outline-none focus:ring-2 focus:ring-alfagreen-500 focus:ring-offset-2"
+                >
+                  Conheça Nossas Soluções
+                </a>
+              </div>
+
+              <dl class="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3">
+                <div class="rounded-2xl bg-white/80 p-4 ring-1 ring-black/5">
+                  <dt class="text-xs font-semibold text-alfagray-800/70">Experiência</dt>
+                  <dd class="mt-1 text-sm font-extrabold text-alfagray-800">15+ anos</dd>
+                </div>
+                <div class="rounded-2xl bg-white/80 p-4 ring-1 ring-black/5">
+                  <dt class="text-xs font-semibold text-alfagray-800/70">Atuação</dt>
+                  <dd class="mt-1 text-sm font-extrabold text-alfagray-800">Nacional</dd>
+                </div>
+                <div class="rounded-2xl bg-white/80 p-4 ring-1 ring-black/5">
+                  <dt class="text-xs font-semibold text-alfagray-800/70">Operação</dt>
+                  <dd class="mt-1 text-sm font-extrabold text-alfagray-800">24/7</dd>
+                </div>
+              </dl>
+            </div>
+
+            <div class="reveal">
+              <div class="relative overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-black/5">
+                <img
+                  src="./assets/images/frotas.jpg"
+                  alt="Frota corporativa ALFACAR"
+                  class="h-[280px] w-full object-cover sm:h-[360px] lg:h-[440px]"
+                  decoding="async"
+                  fetchpriority="high"
+                />
+              </div>
+              <p class="mt-3 text-xs text-alfagray-800/60">
+                Frota moderna • Mobilidade corporativa — Estrutura pronta para atender operações com padrão,
+                rastreabilidade e disponibilidade.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sobre -->
+      <section id="sobre" class="bg-white">
+        <div class="container mx-auto px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+          <div class="grid gap-10 lg:grid-cols-12 lg:gap-12">
+            <div class="reveal lg:col-span-5">
+              <h2 class="text-2xl font-extrabold tracking-tight text-alfagray-800 sm:text-3xl">
+                Quem Somos
+              </h2>
+              <p class="mt-4 text-base leading-relaxed text-alfagray-800/75">
+                Somos a <strong>ALFACAR - Locação e Transportes</strong>, empresa baiana com
+                <strong>15+ anos de experiência</strong> especializada em mobilidade corporativa e
+                saúde móvel. Atuamos em quatro regiões do Brasil: <strong>Sul</strong>,
+                <strong>Sudeste</strong>, <strong>Nordeste</strong> e <strong>Centro-Oeste</strong>.
+              </p>
+
+              <div class="mt-6 inline-flex items-center gap-2 rounded-full bg-alfagreen-50 px-4 py-2">
+                <span class="text-sm font-semibold text-alfagreen-600">Empresa 100% Brasileira</span>
+                <span class="text-sm text-alfagray-800/60">•</span>
+                <span class="text-sm font-semibold text-alfagray-800/75">Salvador/BA</span>
+              </div>
+            </div>
+
+            <div class="reveal lg:col-span-7">
+              <div class="grid gap-4 sm:grid-cols-3">
+                <div class="rounded-3xl bg-alfagray-50 p-6 shadow-sm ring-1 ring-black/5">
+                  <div class="text-sm font-extrabold text-alfagray-800">Segurança</div>
+                  <p class="mt-2 text-sm leading-relaxed text-alfagray-800/70">
+                    Processos claros, equipe treinada e foco em reduzir riscos operacionais.
+                  </p>
+                </div>
+                <div class="rounded-3xl bg-alfagray-50 p-6 shadow-sm ring-1 ring-black/5">
+                  <div class="text-sm font-extrabold text-alfagray-800">Eficiência</div>
+                  <p class="mt-2 text-sm leading-relaxed text-alfagray-800/70">
+                    Planejamento e execução com previsibilidade para o seu dia a dia.
+                  </p>
+                </div>
+                <div class="rounded-3xl bg-alfagray-50 p-6 shadow-sm ring-1 ring-black/5">
+                  <div class="text-sm font-extrabold text-alfagray-800">Confiabilidade</div>
+                  <p class="mt-2 text-sm leading-relaxed text-alfagray-800/70">
+                    Atendimento consistente e compromisso com qualidade e conformidade.
+                  </p>
+                </div>
+              </div>
+
+              <div class="mt-6 rounded-3xl border border-black/5 bg-white p-6 shadow-sm">
+                <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                  <div class="text-sm font-semibold text-alfagray-800">
+                    Mobilidade e saúde com governança corporativa
+                  </div>
+                  <a
+                    href="#contato"
+                    class="inline-flex items-center justify-center rounded-xl bg-alfagreen-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-alfagreen-500 focus:outline-none focus:ring-2 focus:ring-alfagreen-500 focus:ring-offset-2"
+                    >Solicitar Contato</a
+                  >
+                </div>
+                <p class="mt-3 text-sm text-alfagray-800/70">
+                  Integramos operação, segurança e atendimento para suportar demandas críticas com
+                  agilidade e padronização.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Soluções -->
+      <section id="solucoes" class="relative overflow-hidden bg-white">
+        <img
+          src="./assets/images/bannerdois.jpg"
+          alt=""
+          aria-hidden="true"
+          class="absolute inset-0 h-full w-full object-cover"
+          loading="lazy"
+          decoding="async"
+        />
+        <div
+          class="pointer-events-none absolute inset-0 bg-gradient-to-br from-alfagray-800/80 via-alfagray-800/55 to-alfagreen-600/45"
+          aria-hidden="true"
+        ></div>
+
+        <div class="container relative mx-auto px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+          <div class="reveal max-w-2xl">
+            <h2 class="text-2xl font-extrabold tracking-tight text-white drop-shadow sm:text-3xl">Soluções</h2>
+            <p class="mt-4 text-base leading-relaxed text-white/85 drop-shadow">
+              Um portfólio objetivo, pensado para operações corporativas que exigem serviço consistente,
+              segurança e disponibilidade.
+            </p>
+          </div>
+
+          <div class="mt-10 grid gap-6 lg:grid-cols-2">
+            <article
+              class="reveal group rounded-3xl bg-white p-7 shadow-lg ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+              aria-label="Mobilidade corporativa"
+            >
+              <div class="flex items-start gap-4">
+                <div class="grid h-12 w-12 place-items-center rounded-2xl bg-alfagreen-50 text-alfagreen-600 ring-1 ring-black/5" aria-hidden="true">
+                  <i data-lucide="car" class="h-6 w-6"></i>
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-lg font-extrabold text-alfagray-800">Mobilidade Corporativa</h3>
+                  <p class="mt-2 text-sm leading-relaxed text-alfagray-800/70">
+                    Soluções de locação e transporte executivo/corporativo com padrão de serviço e foco em
+                    segurança operacional.
+                  </p>
+                </div>
+              </div>
+
+              <ul class="mt-6 grid gap-2 text-sm text-alfagray-800/80">
+                <li class="flex items-start gap-2">
+                  <span class="mt-0.5 text-alfagreen-600" aria-hidden="true">
+                    <i data-lucide="check" class="h-4 w-4"></i>
+                  </span>
+                  <span><strong>Locação de Veículos</strong> com flexibilidade e controle.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="mt-0.5 text-alfagreen-600" aria-hidden="true">
+                    <i data-lucide="check" class="h-4 w-4"></i>
+                  </span>
+                  <span><strong>Transporte Executivo e Corporativo</strong> com pontualidade.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="mt-0.5 text-alfagreen-600" aria-hidden="true">
+                    <i data-lucide="check" class="h-4 w-4"></i>
+                  </span>
+                  <span><strong>Padronização e rastreabilidade</strong> em rotinas críticas.</span>
+                </li>
+              </ul>
+
+              <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <a
+                  href="#contato"
+                  class="inline-flex items-center justify-center rounded-xl bg-alfagreen-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-alfagreen-500 focus:outline-none focus:ring-2 focus:ring-alfagreen-500 focus:ring-offset-2"
+                  >Solicite uma Proposta</a
+                >
+                <a
+                  href="#diferenciais"
+                  class="inline-flex items-center justify-center rounded-xl border border-black/10 px-5 py-2.5 text-sm font-semibold text-alfagray-800 transition-all hover:bg-alfagray-50 focus:outline-none focus:ring-2 focus:ring-alfagreen-500 focus:ring-offset-2"
+                  >Saiba Mais</a
+                >
+              </div>
+            </article>
+
+            <article
+              class="reveal group rounded-3xl bg-white p-7 shadow-lg ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+              aria-label="Saúde móvel"
+            >
+              <div class="flex items-start gap-4">
+                <div class="grid h-12 w-12 place-items-center rounded-2xl bg-alfagreen-50 text-alfagreen-600 ring-1 ring-black/5" aria-hidden="true">
+                  <i data-lucide="heart-pulse" class="h-6 w-6"></i>
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-lg font-extrabold text-alfagray-800">Saúde Móvel</h3>
+                  <p class="mt-2 text-sm leading-relaxed text-alfagray-800/70">
+                    Atendimento móvel especializado e remoções com padrão técnico e assistencial, respeitando
+                    protocolos e conformidade.
+                  </p>
+                </div>
+              </div>
+
+              <ul class="mt-6 grid gap-2 text-sm text-alfagray-800/80">
+                <li class="flex items-start gap-2">
+                  <span class="mt-0.5 text-alfagreen-600" aria-hidden="true">
+                    <i data-lucide="check" class="h-4 w-4"></i>
+                  </span>
+                  <span><strong>Atendimento Móvel Especializado</strong> com agilidade.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="mt-0.5 text-alfagreen-600" aria-hidden="true">
+                    <i data-lucide="check" class="h-4 w-4"></i>
+                  </span>
+                  <span><strong>Remoção e Transporte de Pacientes</strong> com cuidado.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="mt-0.5 text-alfagreen-600" aria-hidden="true">
+                    <i data-lucide="check" class="h-4 w-4"></i>
+                  </span>
+                  <span><strong>Padrão técnico</strong> e foco em segurança assistencial.</span>
+                </li>
+              </ul>
+
+              <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <a
+                  href="#contato"
+                  class="inline-flex items-center justify-center rounded-xl bg-alfagreen-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-alfagreen-500 focus:outline-none focus:ring-2 focus:ring-alfagreen-500 focus:ring-offset-2"
+                  >Solicitar Contato</a
+                >
+                <a
+                  href="#diferenciais"
+                  class="inline-flex items-center justify-center rounded-xl border border-black/10 px-5 py-2.5 text-sm font-semibold text-alfagray-800 transition-all hover:bg-alfagray-50 focus:outline-none focus:ring-2 focus:ring-alfagreen-500 focus:ring-offset-2"
+                  >Conheça Nossos Diferenciais</a
+                >
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Categorias -->
+      <section id="categorias" class="bg-white">
+        <div class="container mx-auto px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+          <div class="reveal text-center">
+            <h2 class="text-3xl font-extrabold tracking-tight text-alfagray-800 sm:text-4xl">Conheça as categorias</h2>
+          </div>
+
+          <div class="reveal mt-8">
+            <div id="categoryTabs" role="tablist" aria-label="Categorias de veículos" class="mx-auto flex max-w-6xl flex-wrap justify-center gap-4">
+              <button
+                type="button"
+                id="tab-leves"
+                role="tab"
+                aria-selected="true"
+                aria-controls="categoryPanel"
+                tabindex="0"
+                data-category="leves"
+                class="category-tab flex w-[150px] flex-col items-center justify-center gap-2 rounded-xl border border-alfagreen-600 bg-white px-4 py-4 text-center shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow"
+              >
+                <span class="grid h-7 w-7 place-items-center text-alfagray-800/60" aria-hidden="true">
+                  <i data-lucide="car" class="h-6 w-6"></i>
+                </span>
+                <span class="text-xs font-semibold text-alfagray-800">Leves</span>
+              </button>
+
+              <button
+                type="button"
+                id="tab-vans"
+                role="tab"
+                aria-selected="false"
+                aria-controls="categoryPanel"
+                tabindex="-1"
+                data-category="vans"
+                class="category-tab flex w-[150px] flex-col items-center justify-center gap-2 rounded-xl border border-black/10 bg-white px-4 py-4 text-center shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-alfagreen-500 hover:shadow"
+              >
+                <span class="grid h-7 w-7 place-items-center text-alfagray-800/60" aria-hidden="true">
+                  <i data-lucide="bus" class="h-6 w-6"></i>
+                </span>
+                <span class="text-xs font-semibold text-alfagray-800">Vans</span>
+              </button>
+
+              <button
+                type="button"
+                id="tab-eletricos"
+                role="tab"
+                aria-selected="false"
+                aria-controls="categoryPanel"
+                tabindex="-1"
+                data-category="eletricos"
+                class="category-tab flex w-[150px] flex-col items-center justify-center gap-2 rounded-xl border border-black/10 bg-white px-4 py-4 text-center shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-alfagreen-500 hover:shadow"
+              >
+                <span class="grid h-7 w-7 place-items-center text-alfagray-800/60" aria-hidden="true">
+                  <i data-lucide="zap" class="h-6 w-6"></i>
+                </span>
+                <span class="text-xs font-semibold text-alfagray-800">Elétricos</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="reveal mt-10">
+            <div class="relative mx-auto max-w-6xl px-10 sm:px-14">
+              <button
+                type="button"
+                id="categoryPrev"
+                class="absolute left-0 top-1/2 -translate-y-1/2 rounded-full border border-black/10 bg-white p-3 text-alfagray-800/70 shadow-sm transition-all hover:bg-alfagray-50 hover:text-alfagray-800 focus:outline-none focus:ring-2 focus:ring-alfagreen-500 focus:ring-offset-2"
+                aria-label="Categoria anterior"
+              >
+                <i data-lucide="chevron-left" class="h-5 w-5" aria-hidden="true"></i>
+              </button>
+
+              <button
+                type="button"
+                id="categoryNext"
+                class="absolute right-0 top-1/2 -translate-y-1/2 rounded-full border border-black/10 bg-white p-3 text-alfagray-800/70 shadow-sm transition-all hover:bg-alfagray-50 hover:text-alfagray-800 focus:outline-none focus:ring-2 focus:ring-alfagreen-500 focus:ring-offset-2"
+                aria-label="Próxima categoria"
+              >
+                <i data-lucide="chevron-right" class="h-5 w-5" aria-hidden="true"></i>
+              </button>
+
+              <div id="categoryPanel" role="tabpanel" aria-labelledby="tab-leves" class="mx-auto flex min-h-[300px] items-center justify-center sm:min-h-[420px]">
+                <div class="relative mx-auto w-full max-w-4xl aspect-[16/7]">
+                  <div id="categoryImagePlaceholder" class="absolute inset-0 grid place-items-center rounded-2xl border border-black/5 bg-alfagray-50 px-6 text-center">
+                    <div class="max-w-xl">
+                      <div class="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-white text-alfagreen-600 ring-1 ring-black/5">
+                        <i data-lucide="car" class="h-6 w-6" aria-hidden="true"></i>
+                      </div>
+                      <div class="mt-3 text-sm font-extrabold text-alfagray-800">Imagem do veículo</div>
+                      <div class="mt-1 text-xs text-alfagray-800/60">
+                        Adicione sua imagem e ela aparecerá aqui.
+                      </div>
+                    </div>
+                  </div>
+                  <img
+                    id="categoryImage"
+                    src=""
+                    alt=""
+                    class="absolute inset-0 h-full w-full rounded-2xl object-contain opacity-0 transition-opacity duration-300"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="relative z-10 mt-6 border-t border-black/5 pt-6 text-center">
+              <h3 id="categoryTitle" class="text-2xl font-extrabold tracking-tight text-alfagray-800 sm:text-3xl">Leves</h3>
+              <p id="categoryDescription" class="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-alfagray-800/65">
+                Veículos ideais para deslocamentos do dia a dia com conforto, eficiência e agilidade.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Diferenciais -->
+      <section id="diferenciais" class="bg-white">
+        <div class="container mx-auto px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+          <div class="reveal max-w-2xl">
+            <h2 class="text-2xl font-extrabold tracking-tight text-alfagray-800 sm:text-3xl">Diferenciais</h2>
+            <p class="mt-4 text-base leading-relaxed text-alfagray-800/75">
+              Estrutura e atendimento orientados a operações corporativas: padronização, disponibilidade e conformidade.
+            </p>
+          </div>
+
+          <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="reveal rounded-3xl bg-alfagray-50 p-6 ring-1 ring-black/5">
+              <div class="flex items-center gap-3">
+                <div class="grid h-10 w-10 place-items-center rounded-2xl bg-white ring-1 ring-black/5" aria-hidden="true">
+                  <i data-lucide="car" class="h-5 w-5 text-alfagray-800/70"></i>
+                </div>
+                <div class="text-sm font-extrabold text-alfagray-800">Frota Moderna</div>
+              </div>
+              <p class="mt-3 text-sm text-alfagray-800/70">Veículos diversificados e adequados ao seu nível de serviço.</p>
+            </div>
+            <div class="reveal rounded-3xl bg-alfagray-50 p-6 ring-1 ring-black/5">
+              <div class="flex items-center gap-3">
+                <div class="grid h-10 w-10 place-items-center rounded-2xl bg-white ring-1 ring-black/5" aria-hidden="true">
+                  <i data-lucide="users" class="h-5 w-5 text-alfagray-800/70"></i>
+                </div>
+                <div class="text-sm font-extrabold text-alfagray-800">Equipes Treinadas</div>
+              </div>
+              <p class="mt-3 text-sm text-alfagray-800/70">Conduta profissional, protocolos e foco em segurança.</p>
+            </div>
+            <div class="reveal rounded-3xl bg-alfagray-50 p-6 ring-1 ring-black/5">
+              <div class="flex items-center gap-3">
+                <div class="grid h-10 w-10 place-items-center rounded-2xl bg-white ring-1 ring-black/5" aria-hidden="true">
+                  <i data-lucide="map-pin" class="h-5 w-5 text-alfagray-800/70"></i>
+                </div>
+                <div class="text-sm font-extrabold text-alfagray-800">Atuação Nacional</div>
+              </div>
+              <p class="mt-3 text-sm text-alfagray-800/70">Cobertura nas regiões Sul, Sudeste, Nordeste e Centro-Oeste.</p>
+            </div>
+            <div class="reveal rounded-3xl bg-alfagray-50 p-6 ring-1 ring-black/5">
+              <div class="flex items-center gap-3">
+                <div class="grid h-10 w-10 place-items-center rounded-2xl bg-white ring-1 ring-black/5" aria-hidden="true">
+                  <i data-lucide="moon" class="h-5 w-5 text-alfagray-800/70"></i>
+                </div>
+                <div class="text-sm font-extrabold text-alfagray-800">Operações 24h</div>
+              </div>
+              <p class="mt-3 text-sm text-alfagray-800/70">Disponibilidade 24/7 para suportar demandas críticas.</p>
+            </div>
+            <div class="reveal rounded-3xl bg-alfagray-50 p-6 ring-1 ring-black/5">
+              <div class="flex items-center gap-3">
+                <div class="grid h-10 w-10 place-items-center rounded-2xl bg-white ring-1 ring-black/5" aria-hidden="true">
+                  <i data-lucide="badge-check" class="h-5 w-5 text-alfagray-800/70"></i>
+                </div>
+                <div class="text-sm font-extrabold text-alfagray-800">Compliance Legal</div>
+              </div>
+              <p class="mt-3 text-sm text-alfagray-800/70">Conformidade e documentação alinhadas à operação.</p>
+            </div>
+            <div class="reveal rounded-3xl bg-alfagray-50 p-6 ring-1 ring-black/5">
+              <div class="flex items-center gap-3">
+                <div class="grid h-10 w-10 place-items-center rounded-2xl bg-white ring-1 ring-black/5" aria-hidden="true">
+                  <i data-lucide="building-2" class="h-5 w-5 text-alfagray-800/70"></i>
+                </div>
+                <div class="text-sm font-extrabold text-alfagray-800">Atendimento Corporativo</div>
+              </div>
+              <p class="mt-3 text-sm text-alfagray-800/70">Relacionamento objetivo, SLAs e foco em resultados.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Números -->
+      <section id="numeros" class="bg-alfagray-50">
+        <div class="container mx-auto px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+          <div class="reveal max-w-2xl">
+            <h2 class="text-2xl font-extrabold tracking-tight text-alfagray-800 sm:text-3xl">
+              Números que sustentam a confiança
+            </h2>
+            <p class="mt-4 text-base leading-relaxed text-alfagray-800/75">
+              Credibilidade construída ao longo do tempo, com disponibilidade e abrangência.
+            </p>
+          </div>
+
+          <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" aria-label="Estatísticas">
+            <div class="reveal rounded-3xl bg-white p-7 shadow-sm ring-1 ring-black/5">
+              <div class="text-xs font-semibold text-alfagray-800/60">Anos de Experiência</div>
+              <div class="mt-3 flex items-baseline gap-2">
+                <div class="text-3xl font-extrabold text-alfagray-800">
+                  <span class="counter" data-target="15" data-suffix="+">0</span>
+                </div>
+              </div>
+              <p class="mt-2 text-sm text-alfagray-800/70">Histórico sólido em operações corporativas.</p>
+            </div>
+            <div class="reveal rounded-3xl bg-white p-7 shadow-sm ring-1 ring-black/5">
+              <div class="text-xs font-semibold text-alfagray-800/60">Regiões Atendidas</div>
+              <div class="mt-3 text-3xl font-extrabold text-alfagray-800">
+                <span class="counter" data-target="4" data-suffix="">0</span>
+              </div>
+              <p class="mt-2 text-sm text-alfagray-800/70">Presença nacional com cobertura regional.</p>
+            </div>
+            <div class="reveal rounded-3xl bg-white p-7 shadow-sm ring-1 ring-black/5">
+              <div class="text-xs font-semibold text-alfagray-800/60">Operação</div>
+              <div class="mt-3 text-3xl font-extrabold text-alfagray-800">
+                <span class="counter" data-target="24" data-suffix="/7">0</span>
+              </div>
+              <p class="mt-2 text-sm text-alfagray-800/70">Disponibilidade contínua para apoiar sua rotina.</p>
+            </div>
+            <div class="reveal rounded-3xl bg-white p-7 shadow-sm ring-1 ring-black/5">
+              <div class="text-xs font-semibold text-alfagray-800/60">Frota</div>
+              <div class="mt-3 inline-flex items-center gap-2 rounded-full bg-alfagreen-50 px-4 py-2">
+                <span class="text-sm font-extrabold text-alfagreen-600">Diversificada</span>
+                <span class="text-sm text-alfagray-800/60">•</span>
+                <span class="text-sm font-semibold text-alfagray-800/75">Sob dimensionamento</span>
+              </div>
+              <p class="mt-3 text-sm text-alfagray-800/70">Indicador qualitativo (ajuste com dados oficiais).</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="bg-gradient-to-r from-alfagreen-600 to-alfagreen-500">
+        <div class="container mx-auto px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+          <div class="reveal grid gap-8 lg:grid-cols-12 lg:items-center">
+            <div class="lg:col-span-7">
+              <h2 class="text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
+                Pronto para Transformar sua Operação?
+              </h2>
+              <p class="mt-4 text-base leading-relaxed text-white/90">Fale com nossos especialistas.</p>
+            </div>
+            <div class="lg:col-span-5 lg:flex lg:justify-end">
+              <a
+                href="#contato"
+                class="inline-flex w-full items-center justify-center rounded-2xl bg-white px-8 py-4 text-base font-extrabold text-alfagreen-600 shadow-lg transition-all hover:bg-alfagreen-50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-alfagreen-600 sm:w-auto"
+              >
+                Solicitar Contato
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contato -->
+      <section id="contato" class="bg-white">
+        <div class="container mx-auto px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+          <div class="grid gap-10 lg:grid-cols-12 lg:gap-12">
+            <div class="reveal lg:col-span-5">
+              <h2 class="text-2xl font-extrabold tracking-tight text-alfagray-800 sm:text-3xl">Fale Conosco</h2>
+              <p class="mt-4 text-base leading-relaxed text-alfagray-800/75">
+                Conte o que você precisa e retornamos com agilidade.
+              </p>
+
+              <div class="mt-8 rounded-3xl bg-alfagray-50 p-6 ring-1 ring-black/5">
+                <div class="text-sm font-extrabold text-alfagray-800">ALFACAR - Locação e Transportes</div>
+                <dl class="mt-4 grid gap-3 text-sm text-alfagray-800/80">
+                  <div>
+                    <dt class="text-xs font-semibold text-alfagray-800/60">Endereço</dt>
+                    <dd class="mt-1">Rua Luiz Anselmo, nº 590, Sala 304 - Salvador/BA</dd>
+                  </div>
+                  <div>
+                    <dt class="text-xs font-semibold text-alfagray-800/60">CEP</dt>
+                    <dd class="mt-1">40.260-475</dd>
+                  </div>
+                  <div>
+                    <dt class="text-xs font-semibold text-alfagray-800/60">CNPJ</dt>
+                    <dd class="mt-1">12.339.109/0001-37</dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+
+            <div class="reveal lg:col-span-7">
+              <form
+                id="contactForm"
+                class="rounded-3xl border border-black/5 bg-white p-7 shadow-lg"
+                data-formsubmit-email=""
+                novalidate
+                aria-label="Formulário de contato"
+              >
+                <div class="grid gap-5 sm:grid-cols-2">
+                  <div class="sm:col-span-1">
+                    <label for="nome" class="block text-sm font-semibold text-alfagray-800">Nome</label>
+                    <input
+                      id="nome"
+                      name="nome"
+                      type="text"
+                      autocomplete="name"
+                      class="mt-2 w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-sm text-alfagray-800 shadow-sm outline-none transition-all focus:border-alfagreen-500 focus:ring-2 focus:ring-alfagreen-500/20"
+                      placeholder="Seu nome"
+                      required
+                    />
+                    <p class="mt-2 hidden text-xs font-semibold text-red-600" data-error-for="nome">Informe seu nome.</p>
+                  </div>
+                  <div class="sm:col-span-1">
+                    <label for="empresa" class="block text-sm font-semibold text-alfagray-800">Empresa</label>
+                    <input
+                      id="empresa"
+                      name="empresa"
+                      type="text"
+                      autocomplete="organization"
+                      class="mt-2 w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-sm text-alfagray-800 shadow-sm outline-none transition-all focus:border-alfagreen-500 focus:ring-2 focus:ring-alfagreen-500/20"
+                      placeholder="Nome da empresa"
+                    />
+                  </div>
+                  <div class="sm:col-span-1">
+                    <label for="email" class="block text-sm font-semibold text-alfagray-800">E-mail</label>
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      autocomplete="email"
+                      class="mt-2 w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-sm text-alfagray-800 shadow-sm outline-none transition-all focus:border-alfagreen-500 focus:ring-2 focus:ring-alfagreen-500/20"
+                      placeholder="voce@empresa.com"
+                      required
+                    />
+                    <p class="mt-2 hidden text-xs font-semibold text-red-600" data-error-for="email">Informe um e-mail válido.</p>
+                  </div>
+                  <div class="sm:col-span-1">
+                    <label for="telefone" class="block text-sm font-semibold text-alfagray-800">Telefone</label>
+                    <input
+                      id="telefone"
+                      name="telefone"
+                      type="tel"
+                      inputmode="tel"
+                      autocomplete="tel"
+                      class="mt-2 w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-sm text-alfagray-800 shadow-sm outline-none transition-all focus:border-alfagreen-500 focus:ring-2 focus:ring-alfagreen-500/20"
+                      placeholder="(71) 99999-9999"
+                      required
+                    />
+                    <p class="mt-2 hidden text-xs font-semibold text-red-600" data-error-for="telefone">Informe seu telefone.</p>
+                  </div>
+                  <div class="sm:col-span-2">
+                    <label for="assunto" class="block text-sm font-semibold text-alfagray-800">Assunto</label>
+                    <select
+                      id="assunto"
+                      name="assunto"
+                      class="mt-2 w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-sm text-alfagray-800 shadow-sm outline-none transition-all focus:border-alfagreen-500 focus:ring-2 focus:ring-alfagreen-500/20"
+                      required
+                    >
+                      <option value="" selected>Selecione uma opção</option>
+                      <option value="mobilidade">Mobilidade Corporativa</option>
+                      <option value="saude">Saúde Móvel</option>
+                      <option value="ambos">Mobilidade + Saúde</option>
+                      <option value="outros">Outros</option>
+                    </select>
+                    <p class="mt-2 hidden text-xs font-semibold text-red-600" data-error-for="assunto">Selecione um assunto.</p>
+                  </div>
+                  <div class="sm:col-span-2">
+                    <label for="mensagem" class="block text-sm font-semibold text-alfagray-800">Mensagem</label>
+                    <textarea
+                      id="mensagem"
+                      name="mensagem"
+                      rows="5"
+                      class="mt-2 w-full rounded-xl border border-black/10 bg-white px-4 py-3 text-sm text-alfagray-800 shadow-sm outline-none transition-all focus:border-alfagreen-500 focus:ring-2 focus:ring-alfagreen-500/20"
+                      placeholder="Descreva sua necessidade."
+                      required
+                    ></textarea>
+                    <p class="mt-2 hidden text-xs font-semibold text-red-600" data-error-for="mensagem">Escreva uma mensagem.</p>
+                  </div>
+                </div>
+
+                <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                  <p class="text-xs text-alfagray-800/60">Ao enviar, você concorda em compartilhar seus dados para retorno comercial.</p>
+                  <button
+                    type="submit"
+                    class="inline-flex items-center justify-center rounded-2xl bg-alfagreen-600 px-7 py-3 text-sm font-extrabold text-white shadow-sm transition-all hover:bg-alfagreen-500 focus:outline-none focus:ring-2 focus:ring-alfagreen-500 focus:ring-offset-2"
+                  >
+                    Enviar
+                  </button>
+                </div>
+
+                <div
+                  id="formStatus"
+                  class="mt-4 hidden rounded-2xl border border-alfagreen-600/20 bg-alfagreen-50 px-4 py-3 text-sm font-semibold text-alfagreen-600"
+                  role="status"
+                  aria-live="polite"
+                ></div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="border-t border-black/5 bg-white" aria-label="Rodapé">
+      <div class="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
+        <div class="grid gap-10 lg:grid-cols-12 lg:items-start">
+          <div class="lg:col-span-5">
+            <div class="flex items-center">
+              <img
+                src="./assets/images/logo.svg"
+                alt="ALFACAR - Locação e Transportes"
+                class="h-12 w-auto sm:h-14"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div class="mt-5 text-sm text-alfagray-800/75">
+              Rua Luiz Anselmo, nº 590, Sala 304 - Salvador/BA<br />
+              CEP: 40.260-475<br />
+              CNPJ: 12.339.109/0001-37
+            </div>
+          </div>
+
+          <div class="lg:col-span-3">
+            <div class="text-sm font-extrabold text-alfagray-800">Links rápidos</div>
+            <nav class="mt-4 grid gap-2 text-sm" aria-label="Links do rodapé">
+              <a class="text-alfagray-800/75 hover:text-alfagreen-600" href="#solucoes">Soluções</a>
+              <a class="text-alfagray-800/75 hover:text-alfagreen-600" href="#sobre">Sobre</a>
+              <a class="text-alfagray-800/75 hover:text-alfagreen-600" href="#contato">Contato</a>
+            </nav>
+          </div>
+
+          <div class="lg:col-span-4">
+            <div class="text-sm font-extrabold text-alfagray-800">Pronto para avançar?</div>
+            <p class="mt-4 text-sm text-alfagray-800/75">
+              Solicite contato e receba um retorno objetivo para sua demanda, com foco em segurança e eficiência operacional.
+            </p>
+            <div class="mt-5">
+              <a
+                href="#contato"
+                class="inline-flex items-center justify-center rounded-xl bg-alfagreen-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-alfagreen-500 focus:outline-none focus:ring-2 focus:ring-alfagreen-500 focus:ring-offset-2"
+                >Solicitar Contato</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-10 border-t border-black/5 pt-6 text-xs text-alfagray-800/60">Copyright © 2025 Alfacar</div>
+      </div>
+    </footer>
+
+    <!-- Lucide Icons (UMD) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script defer src="./js/main.js"></script>
+  </body>
+</html>
+
