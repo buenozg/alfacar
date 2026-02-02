@@ -218,8 +218,11 @@
                 O Futuro da Sua Operação Começa Aqui
               </h1>
               <p class="mt-4 text-base leading-relaxed text-alfagray-800/75 sm:text-lg">
-                Ecossistema Integrado - Mobilidade Corporativa &amp; Saúde Móvel. Entregamos segurança,
-                eficiência e confiabilidade para operações críticas, com atuação nacional e suporte 24/7.
+                Ecossistema Integrado - Mobilidade Corporativa &amp; Saúde Móvel.
+                <span class="block"
+                  >Entregamos segurança, eficiência e confiabilidade para operações críticas, com atuação
+                  nacional e suporte 24/7.</span
+                >
               </p>
 
               <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -479,7 +482,12 @@
           </div>
 
           <div class="reveal mt-8">
-            <div id="categoryTabs" role="tablist" aria-label="Categorias de veículos" class="mx-auto flex max-w-6xl flex-wrap justify-center gap-4">
+            <div
+              id="categoryTabs"
+              role="tablist"
+              aria-label="Categorias de veículos"
+              class="mx-auto flex max-w-6xl flex-wrap justify-center gap-4"
+            >
               <button
                 type="button"
                 id="tab-leves"
@@ -488,12 +496,128 @@
                 aria-controls="categoryPanel"
                 tabindex="0"
                 data-category="leves"
-                class="category-tab flex w-[150px] flex-col items-center justify-center gap-2 rounded-xl border border-alfagreen-600 bg-white px-4 py-4 text-center shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow"
+                class="category-tab flex w-[180px] flex-col items-center justify-center gap-2 rounded-xl border border-alfagreen-600 bg-white px-4 py-4 text-center shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow"
               >
                 <span class="grid h-7 w-7 place-items-center text-alfagray-800/60" aria-hidden="true">
                   <i data-lucide="car" class="h-6 w-6"></i>
                 </span>
                 <span class="text-xs font-semibold text-alfagray-800">Leves</span>
+              </button>
+
+              <button
+                type="button"
+                id="tab-ambulancia-uti"
+                role="tab"
+                aria-selected="false"
+                aria-controls="categoryPanel"
+                tabindex="-1"
+                data-category="ambulancia-uti"
+                class="category-tab flex w-[180px] flex-col items-center justify-center gap-2 rounded-xl border border-black/10 bg-white px-4 py-4 text-center shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-alfagreen-500 hover:shadow"
+              >
+                <span class="grid h-7 w-7 place-items-center text-alfagray-800/60" aria-hidden="true">
+                  <i data-lucide="ambulance" class="h-6 w-6"></i>
+                </span>
+                <span class="text-[11px] font-semibold leading-tight text-alfagray-800">
+                  Ambulância Tipo UTI Equipada
+                </span>
+              </button>
+
+              <button
+                type="button"
+                id="tab-ambulancia-resgate"
+                role="tab"
+                aria-selected="false"
+                aria-controls="categoryPanel"
+                tabindex="-1"
+                data-category="ambulancia-resgate"
+                class="category-tab flex w-[180px] flex-col items-center justify-center gap-2 rounded-xl border border-black/10 bg-white px-4 py-4 text-center shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-alfagreen-500 hover:shadow"
+              >
+                <span class="grid h-7 w-7 place-items-center text-alfagray-800/60" aria-hidden="true">
+                  <i data-lucide="ambulance" class="h-6 w-6"></i>
+                </span>
+                <span class="text-[11px] font-semibold leading-tight text-alfagray-800">
+                  Ambulância Tipo Resgate Equipada
+                </span>
+              </button>
+
+              <button
+                type="button"
+                id="tab-van-operacional"
+                role="tab"
+                aria-selected="false"
+                aria-controls="categoryPanel"
+                tabindex="-1"
+                data-category="van-operacional"
+                class="category-tab flex w-[180px] flex-col items-center justify-center gap-2 rounded-xl border border-black/10 bg-white px-4 py-4 text-center shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-alfagreen-500 hover:shadow"
+              >
+                <span class="grid h-7 w-7 place-items-center text-alfagray-800/60" aria-hidden="true">
+                  <i data-lucide="truck" class="h-6 w-6"></i>
+                </span>
+                <span class="text-[11px] font-semibold leading-tight text-alfagray-800">Van Operacional Especial</span>
+              </button>
+
+              <button
+                type="button"
+                id="tab-monitores"
+                role="tab"
+                aria-selected="false"
+                aria-controls="categoryPanel"
+                tabindex="-1"
+                data-category="monitores"
+                class="category-tab flex w-[180px] flex-col items-center justify-center gap-2 rounded-xl border border-black/10 bg-white px-4 py-4 text-center shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-alfagreen-500 hover:shadow"
+              >
+                <span class="grid h-7 w-7 place-items-center text-alfagray-800/60" aria-hidden="true">
+                  <i data-lucide="monitor" class="h-6 w-6"></i>
+                </span>
+                <span class="text-[11px] font-semibold leading-tight text-alfagray-800">Monitores para Apoio</span>
+              </button>
+
+              <button
+                type="button"
+                id="tab-motolancias"
+                role="tab"
+                aria-selected="false"
+                aria-controls="categoryPanel"
+                tabindex="-1"
+                data-category="motolancias"
+                class="category-tab flex w-[180px] flex-col items-center justify-center gap-2 rounded-xl border border-black/10 bg-white px-4 py-4 text-center shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-alfagreen-500 hover:shadow"
+              >
+                <span class="grid h-7 w-7 place-items-center text-alfagray-800/60" aria-hidden="true">
+                  <i data-lucide="bike" class="h-6 w-6"></i>
+                </span>
+                <span class="text-[11px] font-semibold leading-tight text-alfagray-800">Motolâncias</span>
+              </button>
+
+              <button
+                type="button"
+                id="tab-motocicletas"
+                role="tab"
+                aria-selected="false"
+                aria-controls="categoryPanel"
+                tabindex="-1"
+                data-category="motocicletas"
+                class="category-tab flex w-[180px] flex-col items-center justify-center gap-2 rounded-xl border border-black/10 bg-white px-4 py-4 text-center shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-alfagreen-500 hover:shadow"
+              >
+                <span class="grid h-7 w-7 place-items-center text-alfagray-800/60" aria-hidden="true">
+                  <i data-lucide="bike" class="h-6 w-6"></i>
+                </span>
+                <span class="text-[11px] font-semibold leading-tight text-alfagray-800">Motocicletas</span>
+              </button>
+
+              <button
+                type="button"
+                id="tab-minivan"
+                role="tab"
+                aria-selected="false"
+                aria-controls="categoryPanel"
+                tabindex="-1"
+                data-category="minivan"
+                class="category-tab flex w-[180px] flex-col items-center justify-center gap-2 rounded-xl border border-black/10 bg-white px-4 py-4 text-center shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-alfagreen-500 hover:shadow"
+              >
+                <span class="grid h-7 w-7 place-items-center text-alfagray-800/60" aria-hidden="true">
+                  <i data-lucide="car" class="h-6 w-6"></i>
+                </span>
+                <span class="text-[11px] font-semibold leading-tight text-alfagray-800">Minivan</span>
               </button>
 
               <button
@@ -504,7 +628,7 @@
                 aria-controls="categoryPanel"
                 tabindex="-1"
                 data-category="vans"
-                class="category-tab flex w-[150px] flex-col items-center justify-center gap-2 rounded-xl border border-black/10 bg-white px-4 py-4 text-center shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-alfagreen-500 hover:shadow"
+                class="category-tab flex w-[180px] flex-col items-center justify-center gap-2 rounded-xl border border-black/10 bg-white px-4 py-4 text-center shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-alfagreen-500 hover:shadow"
               >
                 <span class="grid h-7 w-7 place-items-center text-alfagray-800/60" aria-hidden="true">
                   <i data-lucide="bus" class="h-6 w-6"></i>
@@ -520,7 +644,7 @@
                 aria-controls="categoryPanel"
                 tabindex="-1"
                 data-category="eletricos"
-                class="category-tab flex w-[150px] flex-col items-center justify-center gap-2 rounded-xl border border-black/10 bg-white px-4 py-4 text-center shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-alfagreen-500 hover:shadow"
+                class="category-tab flex w-[180px] flex-col items-center justify-center gap-2 rounded-xl border border-black/10 bg-white px-4 py-4 text-center shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-alfagreen-500 hover:shadow"
               >
                 <span class="grid h-7 w-7 place-items-center text-alfagray-800/60" aria-hidden="true">
                   <i data-lucide="zap" class="h-6 w-6"></i>
@@ -758,10 +882,16 @@
               <form
                 id="contactForm"
                 class="rounded-3xl border border-black/5 bg-white p-7 shadow-lg"
-                data-formsubmit-email=""
-                novalidate
+                action="https://formsubmit.co/lbueno.gustavo@gmail.com"
+                method="POST"
                 aria-label="Formulário de contato"
               >
+                <!-- Anti-spam (FormSubmit) -->
+                <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+                <input type="hidden" name="_subject" value="Contato - Landing ALFACAR" />
+                <input type="hidden" name="_template" value="table" />
+                <input type="hidden" name="_next" value="https://buenozg.github.io/alfacar/?sent=1#contato" />
+
                 <div class="grid gap-5 sm:grid-cols-2">
                   <div class="sm:col-span-1">
                     <label for="nome" class="block text-sm font-semibold text-alfagray-800">Nome</label>

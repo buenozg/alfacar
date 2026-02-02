@@ -80,6 +80,48 @@ const categories = [
     image: "./assets/images/leve.png",
   },
   {
+    id: "ambulancia-uti",
+    label: "Ambulância Tipo UTI Equipada",
+    description: "Atendimento móvel com estrutura e equipamentos para suporte avançado, conforme necessidade da operação.",
+    image: "./assets/images/ambulancia-uti.jpg",
+  },
+  {
+    id: "ambulancia-resgate",
+    label: "Ambulância Tipo Resgate Equipada",
+    description: "Suporte para remoções e atendimentos com agilidade, com equipamentos adequados ao perfil assistencial.",
+    image: "./assets/images/ambulancia-resgate.jpg",
+  },
+  {
+    id: "van-operacional",
+    label: "Van Operacional Especial",
+    description: "Veículos para apoio operacional e logística de equipes, com configuração conforme demanda do cliente.",
+    image: "./assets/images/van-operacional.jpg",
+  },
+  {
+    id: "monitores",
+    label: "Monitores para Apoio",
+    description: "Equipamentos de monitoramento para suporte às operações de saúde móvel e atendimentos especializados.",
+    image: "./assets/images/monitores.jpg",
+  },
+  {
+    id: "motolancias",
+    label: "Motolâncias",
+    description: "Resposta rápida para apoio em atendimentos e deslocamentos, com agilidade em áreas de difícil acesso.",
+    image: "./assets/images/motolancias.jpg",
+  },
+  {
+    id: "motocicletas",
+    label: "Motocicletas",
+    description: "Apoio logístico e operacional com mobilidade elevada, reduzindo tempo de resposta em rotinas críticas.",
+    image: "./assets/images/motocicletas.jpg",
+  },
+  {
+    id: "minivan",
+    label: "Minivan",
+    description: "Conforto e praticidade para transporte de equipes e deslocamentos corporativos, com flexibilidade de uso.",
+    image: "./assets/images/minivan.jpg",
+  },
+  {
     id: "vans",
     label: "Vans",
     description: "Transporte de equipes e volumes maiores com segurança, organização e eficiência.",
@@ -265,6 +307,15 @@ if (!prefersReducedMotion && "IntersectionObserver" in window && numbersSection)
 const form = $("#contactForm");
 const formStatus = $("#formStatus");
 
+// Se voltar do FormSubmit com ?sent=1, mostra confirmação
+if (formStatus) {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("sent") === "1") {
+    formStatus.textContent = "Mensagem enviada com sucesso. Em breve, nossa equipe entrará em contato.";
+    formStatus.classList.remove("hidden");
+  }
+}
+
 const validators = {
   nome: (v) => v.trim().length >= 2,
   email: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()),
@@ -272,6 +323,18 @@ const validators = {
   assunto: (v) => v.trim().length > 0,
   mensagem: (v) => v.trim().length >= 10,
 };
+
+function ensureHiddenInput(formEl, name, value) {
+  if (!formEl) return;
+  let input = formEl.querySelector(`input[type="hidden"][name="${CSS.escape(name)}"]`);
+  if (!input) {
+    input = document.createElement("input");
+    input.type = "hidden";
+    input.name = name;
+    formEl.appendChild(input);
+  }
+  input.value = value;
+}
 
 function setError(fieldId, show) {
   const msg = document.querySelector(`[data-error-for="${fieldId}"]`);
@@ -295,26 +358,66 @@ function validateField(id) {
   document.getElementById(id)?.addEventListener("input", () => validateField(id));
 });
 
-form?.addEventListener("submit", async (e) => {
-  e.preventDefault();
+// Se você estiver usando FormSubmit via HTML (form action="https://formsubmit.co/..."),
+// não precisamos interceptar o submit no JS.
+const formsubmitEmailFromDataset = (form?.dataset?.formsubmitEmail || "").trim();
+const shouldInterceptSubmit = Boolean(formsubmitEmailFromDataset);
+
+shouldInterceptSubmit &&
+  form?.addEventListener("submit", async (e) => {
   const fields = ["nome", "email", "telefone", "assunto", "mensagem"];
   const allOk = fields.map(validateField).every(Boolean);
 
   if (!allOk) {
+    e.preventDefault();
     formStatus.textContent = "Revise os campos destacados para enviar.";
     formStatus.classList.remove("hidden");
     return;
   }
 
-  const formData = new FormData(form);
-  const payload = Object.fromEntries(formData.entries());
-
   // Integração opcional com FormSubmit:
   // - defina o atributo data-formsubmit-email com o e-mail de destino (ex.: "contato@suaempresa.com.br")
-  // - isso envia via fetch para o endpoint AJAX do FormSubmit
+  // - modo "redirect" usa o POST padrão (com reCAPTCHA do FormSubmit)
+  // - modo "ajax" envia via fetch para o endpoint AJAX do FormSubmit (sem sair da página)
   const destinationEmail = (form.dataset.formsubmitEmail || "").trim();
+  const submitMode = (form.dataset.formsubmitMode || "ajax").trim().toLowerCase();
+
+  if (!destinationEmail || destinationEmail === "SEU_EMAIL_AQUI") {
+    e.preventDefault();
+    formStatus.textContent = 'Configure o e-mail em data-formsubmit-email (no index.html) para o envio funcionar.';
+    formStatus.classList.remove("hidden");
+    return;
+  }
+
+  if (submitMode === "redirect") {
+    e.preventDefault();
+    formStatus.textContent = "Abrindo verificação de segurança…";
+    formStatus.classList.remove("hidden");
+
+    // Configura envio padrão para FormSubmit (com reCAPTCHA)
+    form.action = `https://formsubmit.co/${encodeURIComponent(destinationEmail)}`;
+    form.method = "POST";
+
+    // Voltar para a página após enviar
+    const nextUrl = new URL(window.location.href);
+    nextUrl.searchParams.set("sent", "1");
+    nextUrl.hash = "contato";
+    ensureHiddenInput(form, "_next", nextUrl.toString());
+
+    // Reforça subject/template caso não existam no HTML
+    ensureHiddenInput(form, "_subject", "Contato - Landing ALFACAR");
+    ensureHiddenInput(form, "_template", "table");
+
+    form.submit();
+    return;
+  }
+
+  // submitMode === "ajax"
+  const formData = new FormData(form);
+  const payload = Object.fromEntries(formData.entries());
   if (destinationEmail) {
     try {
+      e.preventDefault();
       formStatus.textContent = "Enviando..."; // feedback imediato
       formStatus.classList.remove("hidden");
 
@@ -344,7 +447,9 @@ form?.addEventListener("submit", async (e) => {
   }
 
   // Sem backend por padrão: exibe confirmação (demo)
-  console.debug("Contato (demo):", payload);
+  e.preventDefault();
+  const payloadDemo = Object.fromEntries(new FormData(form).entries());
+  console.debug("Contato (demo):", payloadDemo);
   formStatus.textContent = "Mensagem registrada. Em breve, nossa equipe entrará em contato.";
   formStatus.classList.remove("hidden");
   form.reset();
