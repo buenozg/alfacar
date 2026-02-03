@@ -316,6 +316,13 @@ const EMAILJS_CONFIG = {
 };
 // ===================================================================
 
+// ========== WhatsApp flutuante: configure o número aqui ==========
+const WHATSAPP_CONFIG = {
+  // Número com DDD, sem espaços ou símbolos. Ex: "5571999999999" (55 = Brasil, 71 = Salvador)
+  number: "+5511973275004",
+};
+// ===================================================================
+
 function setFieldError(name, show) {
   const msg = document.querySelector(`[data-error-for="${name}"]`);
   if (!msg) return;
@@ -466,4 +473,17 @@ if (document.readyState === "loading") {
 
 // fallback: tenta novamente após o load (CDN lento)
 window.addEventListener("load", renderLucideIcons);
+
+// WhatsApp flutuante: define o link e esconde o botão se o número não estiver configurado
+const whatsappFloat = $("#whatsappFloat");
+if (whatsappFloat) {
+  const num = (WHATSAPP_CONFIG.number || "").replace(/\D/g, "");
+  if (num.length >= 10) {
+    whatsappFloat.href = `https://wa.me/${num}`;
+    whatsappFloat.classList.remove("hidden");
+  } else {
+    whatsappFloat.href = "#";
+    whatsappFloat.classList.add("hidden");
+  }
+}
 
