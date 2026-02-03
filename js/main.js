@@ -83,43 +83,43 @@ const categories = [
     id: "ambulancia-uti",
     label: "Ambulância Tipo UTI Equipada",
     description: "Atendimento móvel com estrutura e equipamentos para suporte avançado, conforme necessidade da operação.",
-    image: "./assets/images/ambulancia-uti.jpg",
+    image: "./assets/images/ambulancia.jpg",
   },
   {
     id: "ambulancia-resgate",
     label: "Ambulância Tipo Resgate Equipada",
     description: "Suporte para remoções e atendimentos com agilidade, com equipamentos adequados ao perfil assistencial.",
-    image: "./assets/images/ambulancia-resgate.jpg",
+    image: "./assets/images/ambulancia.jpg",
   },
   {
     id: "van-operacional",
     label: "Van Operacional Especial",
     description: "Veículos para apoio operacional e logística de equipes, com configuração conforme demanda do cliente.",
-    image: "./assets/images/van-operacional.jpg",
+    image: "./assets/images/operacional_alfacar.png",
   },
   {
     id: "monitores",
     label: "Monitores para Apoio",
     description: "Equipamentos de monitoramento para suporte às operações de saúde móvel e atendimentos especializados.",
-    image: "./assets/images/monitores.jpg",
+    image: "./assets/images/monitor.webp",
   },
   {
     id: "motolancias",
     label: "Motolâncias",
     description: "Resposta rápida para apoio em atendimentos e deslocamentos, com agilidade em áreas de difícil acesso.",
-    image: "./assets/images/motolancias.jpg",
+    image: "./assets/images/motolancia.png",
   },
   {
     id: "motocicletas",
     label: "Motocicletas",
     description: "Apoio logístico e operacional com mobilidade elevada, reduzindo tempo de resposta em rotinas críticas.",
-    image: "./assets/images/motocicletas.jpg",
+    image: "./assets/images/moto.png",
   },
   {
     id: "minivan",
     label: "Minivan",
     description: "Conforto e praticidade para transporte de equipes e deslocamentos corporativos, com flexibilidade de uso.",
-    image: "./assets/images/minivan.jpg",
+    image: "./assets/images/minivan.png",
   },
   {
     id: "vans",
@@ -307,13 +307,19 @@ if (!prefersReducedMotion && "IntersectionObserver" in window && numbersSection)
 const form = $("#contactForm");
 const formStatus = $("#formStatus");
 
-// Se voltar do FormSubmit com ?sent=1, mostra confirmação
-if (formStatus) {
-  const params = new URLSearchParams(window.location.search);
-  if (params.get("sent") === "1") {
-    formStatus.textContent = "Mensagem enviada com sucesso. Em breve, nossa equipe entrará em contato.";
-    formStatus.classList.remove("hidden");
-  }
+// ========== EmailJS: configure aqui (nada no index.html) ==========
+const EMAILJS_CONFIG = {
+  serviceId: "service_b97oe9l", // ex: "service_xxxxx"
+  templateId: "template_c9zedfd", // ex: "template_xxxxx"
+  publicKey: "noD_ONFnS99jb8jFX", // ex: "xxxxxxxxxxxx"
+  recaptchaSiteKey: "6Lca014sAAAAACpbefTZYE9FIOf-YsAQdS3L4YsN", // opcional: preencha para ativar reCAPTCHA v2
+};
+// ===================================================================
+
+function setFieldError(name, show) {
+  const msg = document.querySelector(`[data-error-for="${name}"]`);
+  if (!msg) return;
+  msg.classList.toggle("hidden", !show);
 }
 
 const validators = {
@@ -323,18 +329,6 @@ const validators = {
   assunto: (v) => v.trim().length > 0,
   mensagem: (v) => v.trim().length >= 10,
 };
-
-function ensureHiddenInput(formEl, name, value) {
-  if (!formEl) return;
-  let input = formEl.querySelector(`input[type="hidden"][name="${CSS.escape(name)}"]`);
-  if (!input) {
-    input = document.createElement("input");
-    input.type = "hidden";
-    input.name = name;
-    formEl.appendChild(input);
-  }
-  input.value = value;
-}
 
 function setError(fieldId, show) {
   const msg = document.querySelector(`[data-error-for="${fieldId}"]`);
@@ -358,102 +352,103 @@ function validateField(id) {
   document.getElementById(id)?.addEventListener("input", () => validateField(id));
 });
 
-// Se você estiver usando FormSubmit via HTML (form action="https://formsubmit.co/..."),
-// não precisamos interceptar o submit no JS.
-const formsubmitEmailFromDataset = (form?.dataset?.formsubmitEmail || "").trim();
-const shouldInterceptSubmit = Boolean(formsubmitEmailFromDataset);
+function isPlaceholder(v) {
+  return typeof v !== "string" || !v.trim();
+}
 
-shouldInterceptSubmit &&
-  form?.addEventListener("submit", async (e) => {
+function setupRecaptchaUi() {
+  const wrap = document.getElementById("recaptchaWrap");
+  const widget = wrap?.querySelector(".g-recaptcha");
+  const siteKey = (EMAILJS_CONFIG.recaptchaSiteKey || "").trim();
+  if (!wrap || !widget) return;
+
+  if (!siteKey) {
+    wrap.classList.add("hidden");
+    widget.setAttribute("data-sitekey", "");
+    return;
+  }
+  widget.setAttribute("data-sitekey", siteKey);
+  wrap.classList.remove("hidden");
+  // Carrega o script do reCAPTCHA se ainda não estiver na página
+  if (!document.querySelector('script[src*="google.com/recaptcha"]')) {
+    const s = document.createElement("script");
+    s.src = "https://www.google.com/recaptcha/api.js";
+    s.async = true;
+    s.defer = true;
+    document.head.appendChild(s);
+  }
+}
+
+setupRecaptchaUi();
+
+form?.addEventListener("submit", async (e) => {
+  e.preventDefault();
   const fields = ["nome", "email", "telefone", "assunto", "mensagem"];
   const allOk = fields.map(validateField).every(Boolean);
 
   if (!allOk) {
-    e.preventDefault();
     formStatus.textContent = "Revise os campos destacados para enviar.";
     formStatus.classList.remove("hidden");
     return;
   }
 
-  // Integração opcional com FormSubmit:
-  // - defina o atributo data-formsubmit-email com o e-mail de destino (ex.: "contato@suaempresa.com.br")
-  // - modo "redirect" usa o POST padrão (com reCAPTCHA do FormSubmit)
-  // - modo "ajax" envia via fetch para o endpoint AJAX do FormSubmit (sem sair da página)
-  const destinationEmail = (form.dataset.formsubmitEmail || "").trim();
-  const submitMode = (form.dataset.formsubmitMode || "ajax").trim().toLowerCase();
-
-  if (!destinationEmail || destinationEmail === "SEU_EMAIL_AQUI") {
-    e.preventDefault();
-    formStatus.textContent = 'Configure o e-mail em data-formsubmit-email (no index.html) para o envio funcionar.';
+  // Honeypot: se preenchido, ignora silenciosamente (anti-bot básico)
+  const honey = (form.querySelector('input[name="_honey"]')?.value || "").trim();
+  if (honey) {
+    form.reset();
+    formStatus.textContent = "Mensagem enviada com sucesso. Em breve, nossa equipe entrará em contato.";
     formStatus.classList.remove("hidden");
     return;
   }
 
-  if (submitMode === "redirect") {
-    e.preventDefault();
-    formStatus.textContent = "Abrindo verificação de segurança…";
-    formStatus.classList.remove("hidden");
-
-    // Configura envio padrão para FormSubmit (com reCAPTCHA)
-    form.action = `https://formsubmit.co/${encodeURIComponent(destinationEmail)}`;
-    form.method = "POST";
-
-    // Voltar para a página após enviar
-    const nextUrl = new URL(window.location.href);
-    nextUrl.searchParams.set("sent", "1");
-    nextUrl.hash = "contato";
-    ensureHiddenInput(form, "_next", nextUrl.toString());
-
-    // Reforça subject/template caso não existam no HTML
-    ensureHiddenInput(form, "_subject", "Contato - Landing ALFACAR");
-    ensureHiddenInput(form, "_template", "table");
-
-    form.submit();
-    return;
-  }
-
-  // submitMode === "ajax"
-  const formData = new FormData(form);
-  const payload = Object.fromEntries(formData.entries());
-  if (destinationEmail) {
-    try {
-      e.preventDefault();
-      formStatus.textContent = "Enviando..."; // feedback imediato
+  // reCAPTCHA v2 (opcional): se configurado em EMAILJS_CONFIG
+  const recaptchaSiteKey = (EMAILJS_CONFIG.recaptchaSiteKey || "").trim();
+  const captchaEnabled = Boolean(recaptchaSiteKey);
+  if (captchaEnabled) {
+    const token = window.grecaptcha?.getResponse?.() || "";
+    const ok = token.length > 0;
+    setFieldError("recaptcha", !ok);
+    if (!ok) {
+      formStatus.textContent = "Confirme o CAPTCHA para enviar.";
       formStatus.classList.remove("hidden");
-
-      const res = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(destinationEmail)}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          ...payload,
-          _subject: "Contato - Landing ALFACAR",
-        }),
-      });
-
-      if (!res.ok) throw new Error("Falha ao enviar.");
-      formStatus.textContent = "Mensagem enviada com sucesso. Em breve, nossa equipe entrará em contato.";
-      form.reset();
-      fields.forEach((id) => setError(id, false));
-    } catch (err) {
-      console.error(err);
-      formStatus.textContent =
-        "Não foi possível enviar agora. Tente novamente em instantes ou use outro canal de contato.";
-      formStatus.classList.remove("hidden");
+      return;
     }
+  }
+
+  const { serviceId, templateId, publicKey } = EMAILJS_CONFIG;
+  if (isPlaceholder(serviceId) || isPlaceholder(templateId) || isPlaceholder(publicKey)) {
+    formStatus.textContent =
+      "Configure EmailJS em js/main.js (EMAILJS_CONFIG: serviceId, templateId, publicKey) para o envio funcionar.";
+    formStatus.classList.remove("hidden");
     return;
   }
 
-  // Sem backend por padrão: exibe confirmação (demo)
-  e.preventDefault();
-  const payloadDemo = Object.fromEntries(new FormData(form).entries());
-  console.debug("Contato (demo):", payloadDemo);
-  formStatus.textContent = "Mensagem registrada. Em breve, nossa equipe entrará em contato.";
-  formStatus.classList.remove("hidden");
-  form.reset();
-  fields.forEach((id) => setError(id, false));
+  if (!window.emailjs?.sendForm) {
+    formStatus.textContent = "EmailJS não carregou. Recarregue a página e tente novamente.";
+    formStatus.classList.remove("hidden");
+    return;
+  }
+
+  try {
+    formStatus.textContent = "Enviando...";
+    formStatus.classList.remove("hidden");
+
+    // init pode ser chamado múltiplas vezes; mantemos simples e idempotente
+    window.emailjs.init({ publicKey });
+
+    await window.emailjs.sendForm(serviceId, templateId, form);
+
+    formStatus.textContent = "Mensagem enviada com sucesso. Em breve, nossa equipe entrará em contato.";
+    form.reset();
+    fields.forEach((id) => setError(id, false));
+    setFieldError("recaptcha", false);
+    if (captchaEnabled && window.grecaptcha?.reset) window.grecaptcha.reset();
+  } catch (err) {
+    console.error(err);
+    formStatus.textContent =
+      "Não foi possível enviar agora. Tente novamente em instantes ou use outro canal de contato.";
+    formStatus.classList.remove("hidden");
+  }
 });
 
 // Lucide: renderiza todos os ícones data-lucide

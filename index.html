@@ -882,15 +882,10 @@
               <form
                 id="contactForm"
                 class="rounded-3xl border border-black/5 bg-white p-7 shadow-lg"
-                action="https://formsubmit.co/lbueno.gustavo@gmail.com"
-                method="POST"
                 aria-label="Formulário de contato"
               >
-                <!-- Anti-spam (FormSubmit) -->
+                <!-- Anti-spam (honeypot) -->
                 <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
-                <input type="hidden" name="_subject" value="Contato - Landing ALFACAR" />
-                <input type="hidden" name="_template" value="table" />
-                <input type="hidden" name="_next" value="https://buenozg.github.io/alfacar/?sent=1#contato" />
 
                 <div class="grid gap-5 sm:grid-cols-2">
                   <div class="sm:col-span-1">
@@ -974,6 +969,16 @@
                   </div>
                 </div>
 
+                <!-- reCAPTCHA v2 (opcional, recomendado) -->
+                <div id="recaptchaWrap" class="mt-5 hidden">
+                  <div class="rounded-2xl border border-black/10 bg-white p-4">
+                    <div class="g-recaptcha" data-sitekey=""></div>
+                    <p class="mt-2 hidden text-xs font-semibold text-red-600" data-error-for="recaptcha">
+                      Confirme o CAPTCHA para enviar.
+                    </p>
+                  </div>
+                </div>
+
                 <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <p class="text-xs text-alfagray-800/60">Ao enviar, você concorda em compartilhar seus dados para retorno comercial.</p>
                   <button
@@ -1047,6 +1052,8 @@
 
     <!-- Lucide Icons (UMD) -->
     <script defer src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+    <!-- EmailJS (Browser SDK) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script defer src="./js/main.js"></script>
   </body>
 </html>
